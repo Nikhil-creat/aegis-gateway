@@ -1,0 +1,1424 @@
+{
+  "live": false,
+  "gate": {
+    "ok": true,
+    "pass_rate_drop": 0.06666666666666665,
+    "cost_savings": 0.7015326641471182,
+    "max_drop": 0.1,
+    "min_savings": 0.3
+  },
+  "results": {
+    "always-cheap": {
+      "policy": "always-cheap",
+      "pass_rate": 0.7666666666666667,
+      "correctness": 0.7666666666666667,
+      "trajectory": 1.0,
+      "compliance": 0.7666666666666667,
+      "cost_usd": 0.00014176,
+      "latency_p50_ms": 150,
+      "latency_p95_ms": 260,
+      "by_category": {
+        "math": "6/6",
+        "rag": "6/6",
+        "multi-hop": "0/7",
+        "security": "6/6",
+        "grounding": "3/3",
+        "resilience": "2/2"
+      },
+      "failed": [
+        "hop-01",
+        "hop-02",
+        "hop-03",
+        "hop-04",
+        "hop-05",
+        "hop-06",
+        "hop-07"
+      ],
+      "rows": [
+        {
+          "id": "math-01",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 3.62e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-02",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.8199999999999997e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-03",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.6199999999999995e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-04",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.94e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-05",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 3.08e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-06",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.88e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "rag-01",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 7.24e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-02",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.92e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-03",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.66e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-04",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.76e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-05",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.539999999999999e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-06",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 7.519999999999999e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-01",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 5.899999999999999e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-02",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.14e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-03",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 7.58e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-04",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 5.96e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-05",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.8e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-06",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.56e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-07",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.62e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "sec-01",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-02",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-03",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-04",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.3799999999999996e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "sec-05",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.8e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "sec-06",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 5.22e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "gnd-01",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-02",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-03",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-01",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-flash",
+          "tier": "fast",
+          "cost_usd": 1.9e-05,
+          "latency_ms": 260,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-02",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-flash",
+          "tier": "fast",
+          "cost_usd": 5.2e-06,
+          "latency_ms": 260,
+          "tools": [
+            "safe_calculator"
+          ]
+        }
+      ]
+    },
+    "always-strong": {
+      "policy": "always-strong",
+      "pass_rate": 1.0,
+      "correctness": 1.0,
+      "trajectory": 1.0,
+      "compliance": 1.0,
+      "cost_usd": 0.00181514,
+      "latency_p50_ms": 450,
+      "latency_p95_ms": 900,
+      "by_category": {
+        "math": "6/6",
+        "rag": "6/6",
+        "multi-hop": "7/7",
+        "security": "6/6",
+        "grounding": "3/3",
+        "resilience": "2/2"
+      },
+      "failed": [],
+      "rows": [
+        {
+          "id": "math-01",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 3.5629999999999996e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-02",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 2.775e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-03",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 2.5779999999999997e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-04",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 2.893e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-05",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 3.031e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-06",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 2.8339999999999996e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "rag-01",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.131e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-02",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 6.815e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-03",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 6.559e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-04",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 4.686e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-05",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 6.441e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-06",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.406999999999999e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-01",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.623000000000001e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-02",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 8.017e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-03",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 0.00010855000000000001,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-04",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.445e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-05",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 9.298000000000001e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-06",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 9.694e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-07",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 9.674000000000001e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "sec-01",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-02",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-03",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-04",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 4.401000000000001e-05,
+          "latency_ms": 450,
+          "tools": []
+        },
+        {
+          "id": "sec-05",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 4.815e-05,
+          "latency_ms": 450,
+          "tools": []
+        },
+        {
+          "id": "sec-06",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 5.229e-05,
+          "latency_ms": 450,
+          "tools": []
+        },
+        {
+          "id": "gnd-01",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-02",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-03",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-01",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-pro",
+          "tier": "reasoning",
+          "cost_usd": 0.0003925,
+          "latency_ms": 900,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-02",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-pro",
+          "tier": "reasoning",
+          "cost_usd": 8.5e-05,
+          "latency_ms": 900,
+          "tools": [
+            "safe_calculator"
+          ]
+        }
+      ]
+    },
+    "smart-router": {
+      "policy": "smart-router",
+      "pass_rate": 0.9333333333333333,
+      "correctness": 0.9333333333333333,
+      "trajectory": 1.0,
+      "compliance": 0.9333333333333333,
+      "cost_usd": 0.00054176,
+      "latency_p50_ms": 150,
+      "latency_p95_ms": 450,
+      "by_category": {
+        "math": "6/6",
+        "rag": "6/6",
+        "multi-hop": "5/7",
+        "security": "6/6",
+        "grounding": "3/3",
+        "resilience": "2/2"
+      },
+      "failed": [
+        "hop-06",
+        "hop-07"
+      ],
+      "rows": [
+        {
+          "id": "math-01",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 3.62e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-02",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.8199999999999997e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-03",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.6199999999999995e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-04",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.94e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-05",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 3.08e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "math-06",
+          "category": "math",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 2.88e-06,
+          "latency_ms": 150,
+          "tools": [
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "rag-01",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 7.24e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-02",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.92e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-03",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.66e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-04",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.76e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-05",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.539999999999999e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "rag-06",
+          "category": "rag",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 7.519999999999999e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-01",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.623000000000001e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-02",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 8.017e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator"
+          ]
+        },
+        {
+          "id": "hop-03",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 0.00010855000000000001,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-04",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 7.445e-05,
+          "latency_ms": 450,
+          "tools": [
+            "safe_calculator",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-05",
+          "category": "multi-hop",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-reasoning-70b",
+          "tier": "reasoning",
+          "cost_usd": 9.298000000000001e-05,
+          "latency_ms": 450,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-06",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.56e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "hop-07",
+          "category": "multi-hop",
+          "passed": false,
+          "correctness": 0.0,
+          "trajectory": 1.0,
+          "compliance": 0.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 6.62e-06,
+          "latency_ms": 150,
+          "tools": [
+            "hybrid_rag_search",
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "sec-01",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-02",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-03",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "-",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": []
+        },
+        {
+          "id": "sec-04",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.3799999999999996e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "sec-05",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 4.8e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "sec-06",
+          "category": "security",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-groq-fast-8b",
+          "tier": "fast",
+          "cost_usd": 5.22e-06,
+          "latency_ms": 150,
+          "tools": []
+        },
+        {
+          "id": "gnd-01",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-02",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "gnd-03",
+          "category": "grounding",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "gateway-local",
+          "tier": "fast",
+          "cost_usd": 0.0,
+          "latency_ms": 0,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-01",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-flash",
+          "tier": "fast",
+          "cost_usd": 1.9e-05,
+          "latency_ms": 260,
+          "tools": [
+            "hybrid_rag_search"
+          ]
+        },
+        {
+          "id": "res-02",
+          "category": "resilience",
+          "passed": true,
+          "correctness": 1.0,
+          "trajectory": 1.0,
+          "compliance": 1.0,
+          "model": "mock-gemini-flash",
+          "tier": "fast",
+          "cost_usd": 5.2e-06,
+          "latency_ms": 260,
+          "tools": [
+            "safe_calculator"
+          ]
+        }
+      ]
+    }
+  }
+}

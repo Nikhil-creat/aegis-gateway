@@ -1,0 +1,31 @@
+{
+  "name": "aegis-gateway-web",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Website and live playground for the Aegis AI Gateway",
+  "type": "module",
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs dist",
+    "typecheck": "tsc --noEmit",
+    "parity": "tsx scripts/parity.ts",
+    "check": "node scripts/check.mjs",
+    "test": "npm run typecheck && npm run parity && npm run build && npm run check"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vercel/node": "^5.0.0",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "~5.6.3"
+  }
+}
