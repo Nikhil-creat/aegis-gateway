@@ -80,3 +80,21 @@ def test_rag_ingest_then_agent_cites_the_new_document():
 def test_limits_endpoint_documents_boundaries():
     with client() as c:
         assert {x["area"] for x in c.get("/v1/system/limits").json()["limitations"]} >= {"SQLite", "Free-tier quotas"}
+
+
+def test_prometheus_endpoint_exposes_counters():
+    with client() as c:
+        c.post("/v1/chat", json={"prompt": "hello"})
+        r = c.get("/metrics")
+        assert r.status_code == 200 and r.headers["content-type"].startswith("text/plain")
+        assert "aegis_requests_total 1" in r.text and "aegis_model_up{" in r.text
+
+
+def test_idempotency_key_replays_without_a_second_request():
+    with client() as c:
+        h = {"Idempotency-Key": "order-123"}
+        first = c.post("/v1/chat", json={"prompt": "hello"}, headers=h).json()
+        second = c.post("/v1/chat", json={"prompt": "hello"}, headers=h).json()
+        assert second["request_id"] == first["request_id"] and second["idempotent_replay"] is True
+        assert c.get("/v1/metrics").json()["requests"] == 1
+        assert c.post("/v1/chat", json={"prompt": "something else"}, headers=h).status_code == 409

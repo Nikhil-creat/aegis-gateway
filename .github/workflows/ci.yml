@@ -20,6 +20,18 @@ jobs:
       - uses: actions/upload-artifact@v4
         with: { name: benchmark-report, path: gateway/artifacts/ }
 
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t aegis-gateway:ci gateway
+      - name: Smoke test the container
+        run: |
+          docker run -d --name aegis -p 8000:8000 aegis-gateway:ci
+          for i in $(seq 1 20); do curl -fs http://localhost:8000/healthz && break; sleep 2; done
+          curl -fs http://localhost:8000/healthz
+          curl -fs http://localhost:8000/metrics | grep -q aegis_requests_total
+
   web:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: web } }

@@ -11,6 +11,7 @@ from typing import Any
 
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, Field
 
 from app import __version__
@@ -20,8 +21,10 @@ from app.config import MAX_AGENT_STEPS, Settings
 from app.db import RequestLog
 from app.discovery import discover
 from app.gateway import CHAOS_MODES, POLICIES, BudgetExceeded, Gateway, InvalidRequest
+from app.idempotency import IdempotencyConflict, IdempotencyStore
 from app.kb import default_index
 from app.models import MOCK_MODELS, Registry
+from app.prom import render as render_prometheus
 from app.providers import build_pool
 from app.security import SlidingWindowLimiter
 
@@ -108,6 +111,7 @@ def create_app(settings: Settings | None = None, cache: CacheBackend | None = No
     app.state.gateway = Gateway(cfg, registry, app.state.pool, app.state.log, backend)
     app.state.agent = Agent(app.state.gateway, app.state.index)
     app.state.limiter = SlidingWindowLimiter(cfg.rate_limit_rpm)
+    app.state.idem = IdempotencyStore()
 
     async def guard(request: Request, x_api_key: str | None = Header(default=None)) -> str:
         """API-key auth (when configured) then a per-client sliding-window rate limit."""
@@ -138,14 +142,27 @@ def create_app(settings: Settings | None = None, cache: CacheBackend | None = No
 
     @app.post("/v1/chat")
     async def chat(
-        body: ChatRequest, _c: str = Depends(guard), x_chaos_simulate: str | None = Header(default=None)
+        body: ChatRequest,
+        _c: str = Depends(guard),
+        x_chaos_simulate: str | None = Header(default=None),
+        idempotency_key: str | None = Header(default=None),
     ) -> dict[str, Any]:
+        payload = {"prompt": body.prompt, "policy": body.policy, "chaos": x_chaos_simulate}
+        if idempotency_key:
+            try:
+                stored = app.state.idem.get(idempotency_key, payload)
+            except IdempotencyConflict as exc:
+                raise HTTPException(409, str(exc)) from exc
+            if stored is not None:
+                return {**stored, "idempotent_replay": True}
         try:
             res = await app.state.gateway.chat(body.prompt, body.policy, chaos_header(x_chaos_simulate))
         except (InvalidRequest, BudgetExceeded) as exc:
             raise run_errors(exc) from exc
         if res["status"] == "error":
             raise HTTPException(502, res["answer"])
+        if idempotency_key:
+            app.state.idem.put(idempotency_key, payload, res)
         return res
 
     @app.post("/v1/agent/run")
@@ -164,6 +181,10 @@ def create_app(settings: Settings | None = None, cache: CacheBackend | None = No
     async def ingest(body: IngestRequest) -> dict[str, Any]:
         added = app.state.index.add_text(body.doc_id, body.text)
         return {"doc_id": body.doc_id, "chunks_added": added, "total_chunks": len(app.state.index.chunks)}
+
+    @app.get("/metrics", dependencies=[Depends(guard)], response_class=PlainTextResponse)
+    async def prometheus() -> str:
+        return render_prometheus(app.state.log.summary(), app.state.registry.snapshot())
 
     @app.get("/v1/metrics", dependencies=[Depends(guard)])
     async def metrics() -> dict[str, Any]:

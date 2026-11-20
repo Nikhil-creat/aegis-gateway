@@ -34,6 +34,9 @@ client ──► Guard ──► Router ──► Cache ──► Provider (Groq
 | Agent | Planner → security check → tools (calculator, hybrid RAG, telemetry) → verifier → synthesizer. Max 5 steps; refuses with "Insufficient grounded context" below the retrieval threshold. |
 | Retrieval | BM25 + hashed char-trigram vectors, fused with reciprocal rank fusion. |
 | Learned router | `learned-router` policy: a character-level 1-D CNN (about 4.2k parameters, NumPy, hand-written backprop) predicting whether a prompt needs the strong tier. Prototype trained on synthetic labelled prompts (`python -m evals.train_router`). |
+| Observability | `GET /metrics` in Prometheus text format: request, block and error counters, cache hit ratio, p50/p95 latency, cost, requests per model, and per-model health (`aegis_model_up`). |
+| Idempotency | `Idempotency-Key` header on `POST /v1/chat`: a retry with the same key and body replays the stored response with no second provider call; the same key with a different body returns 409. In-memory and per process. |
+| MCP server | `python -m app.mcp_server` speaks the Model Context Protocol over stdio and exposes four tools (calculator, knowledge-base search, prompt analysis, gateway chat) to any MCP client. Tools only. |
 | Assistant | "Ask Aegis" chat on the website: a bounded retrieval agent over a small knowledge base about the author and the gateway. Cites sources, refuses out-of-scope questions, answers through the gateway (Groq/Gemini when keys are set). |
 | Evals | 30 tasks, three deterministic scorers (correctness, trajectory, compliance), CI gate on pass-rate drop and cost savings. |
 | Chaos | `X-Chaos-Simulate: rate_limit \| timeout \| provider_500` fails the first model on demand. |
@@ -56,12 +59,13 @@ Smart routing is 70.2% cheaper than always-strong and gives up 6.7 points of pas
 cd gateway
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
-pytest -q                                  # 82 tests
+pytest -q                                  # 87 tests
 python -m evals.train_router               # retrain the CNN router + held-out report
 python -m evals.benchmark                  # mock run + CI gate
 cp .env.example .env                       # add GROQ_API_KEY / GEMINI_API_KEY (never commit .env)
 python -m evals.benchmark --live           # real numbers for your resume
-uvicorn app.main:app --reload              # http://localhost:8000/docs
+uvicorn app.main:app --reload              # http://localhost:8000/docs  (metrics at /metrics)
+python -m app.mcp_server                   # MCP stdio server for Claude Desktop / IDE agents
 docker compose up --build                  # gateway + redis
 ```
 
@@ -98,7 +102,7 @@ Never type X or Y from a guess. They are in `gateway/artifacts/benchmark_report.
 
 Implemented and tested: everything above except the items below. The CNN is a small prototype, not a production classifier. `gateway/tests/test_api.py` covers the FastAPI layer and skips itself when `fastapi`/`httpx` are not installed, so run `pytest` in a full environment before relying on it.
 
-Not implemented: CNN router in the website's TypeScript playground (Python API only), a Python endpoint for the assistant (it lives in the web functions), chat memory in the assistant, human-in-the-loop approval, SSE streaming, idempotency keys, LangGraph runtime, PostgreSQL (SQLite is the store), shared rate limiter across replicas. The website playground runs a TypeScript port of the engine, verified against Python for identical model, tier, tools and cost on 90 task runs (`npm run parity`).
+Not implemented: SSE streaming anywhere. The CNN router, MCP server, metrics and idempotency are Python-only (not in the website's TypeScript playground). Also missing: a Python endpoint for the assistant (it lives in the web functions), chat memory in the assistant, human-in-the-loop approval, SSE streaming, LangGraph runtime, PostgreSQL (SQLite is the store), shared rate limiter across replicas. The website playground runs a TypeScript port of the engine, verified against Python for identical model, tier, tools and cost on 90 task runs (`npm run parity`).
 
 ## Deploy
 
