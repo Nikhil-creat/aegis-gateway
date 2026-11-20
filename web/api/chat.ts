@@ -21,7 +21,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
   const b = (body ?? {}) as Record<string, unknown>;
   const prompt = typeof b.prompt === 'string' ? b.prompt : '';
-  const policy = (POLICIES as readonly string[]).includes(String(b.policy)) ? String(b.policy) : 'smart-router';
+  if (b.policy !== undefined && !(POLICIES as readonly string[]).includes(String(b.policy))) return res.status(422).json({ error: 'invalid_request', detail: `unknown policy '${String(b.policy)}'` });
+  const policy = b.policy === undefined ? 'smart-router' : String(b.policy);
   const chaos = (CHAOS_MODES as readonly string[]).includes(String(b.chaos)) ? String(b.chaos) : null;
 
   try {

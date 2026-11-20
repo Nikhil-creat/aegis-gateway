@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "description": "Website and live playground for the Aegis AI Gateway",
   "type": "module",
-  "engines": { "node": ">=20.11" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
@@ -12,8 +14,9 @@
     "typecheck": "tsc --noEmit",
     "parity": "tsx scripts/parity.ts",
     "assistant": "tsx scripts/assistant-check.ts",
+    "api-smoke": "tsx scripts/api-smoke.ts",
     "check": "node scripts/check.mjs",
-    "test": "npm run typecheck && npm run parity && npm run assistant && npm run build && npm run check"
+    "test": "npm run typecheck && npm run parity && npm run assistant && npm run api-smoke && npm run build && npm run check"
   },
   "dependencies": {
     "react": "^19.2.0",

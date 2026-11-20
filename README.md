@@ -2,7 +2,17 @@
 
 **Auto-routing, LLMOps and agent evals in one gateway.** A FastAPI service that sends each LLM request to the cheapest model that can answer it, fails over when a provider breaks, logs model, tokens, latency and cost for every call, and grades its own agent on a fixed 30-task exam that gates CI.
 
+![CI](https://github.com/Nikhil-creat/aegis-gateway/actions/workflows/ci.yml/badge.svg) ![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg) ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+
+![Aegis home page](docs/home.png)
+
 Repo layout: `gateway/` is the Python service and eval harness. `web/` is the website with a live playground, deployed on Vercel.
+
+## Screenshots
+
+| Playground: same prompt, three policies | Ask Aegis: cited answer from the knowledge base |
+|---|---|
+| ![Playground](docs/playground.png) | ![Assistant](docs/assistant.png) |
 
 ## What it does
 
@@ -59,7 +69,7 @@ docker compose up --build                  # gateway + redis
 cd web
 npm install
 npm run dev          # build + serve at http://localhost:4173
-npm test             # typecheck, Python/TS parity, build, SEO and bundle audit
+npm test             # typecheck, Python/TS parity, assistant + API smoke tests, build, SEO and bundle audit
 ```
 
 ## Learned router (prototype)
