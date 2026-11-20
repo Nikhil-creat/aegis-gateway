@@ -17,7 +17,7 @@ jobs:
       - run: pytest -q
       # Fails the build if smart routing loses >10 pts of pass rate vs always-strong or saves <30% cost.
       - run: python -m evals.benchmark --max-drop 0.10 --min-savings 0.30
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: { name: benchmark-report, path: gateway/artifacts/ }
 
   docker:
