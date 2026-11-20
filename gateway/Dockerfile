@@ -1,10 +1,10 @@
 # syntax=docker/dockerfile:1
-FROM python:3.12-slim AS build
+FROM python:3.15-slim AS build
 WORKDIR /w
 COPY requirements.txt .
 RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 
-FROM python:3.12-slim
+FROM python:3.15-slim
 ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1 DB_PATH=/data/gateway.db
 RUN useradd --create-home --uid 10001 app && mkdir /data && chown app /data
 COPY --from=build /install /usr/local
