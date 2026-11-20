@@ -1,3 +1,4 @@
+import { assistantIndex } from '../../lib/assistant-kb';
 import { Agent, Gateway, InvalidRequest, LIMITS, MOCK_MODELS, Registry, defaultIndex } from '../../lib/engine';
 import type { GatewayResult } from '../../lib/engine';
 
@@ -33,7 +34,7 @@ export interface RegistryView {
 export interface RunRequest {
   prompt: string;
   policy: string;
-  mode: 'chat' | 'agent';
+  mode: 'chat' | 'agent' | 'assistant';
   chaos: string | null;
 }
 export class ApiError extends Error {
@@ -43,12 +44,12 @@ export class ApiError extends Error {
 }
 
 // Browser-side engine: the same TypeScript port the serverless functions use. Used when /api is unreachable.
-let local: { gateway: Gateway; agent: Agent; registry: Registry } | null = null;
+let local: { gateway: Gateway; agent: Agent; assistant: Agent; registry: Registry } | null = null;
 function localEngine() {
   if (!local) {
     const registry = new Registry([...MOCK_MODELS]);
     const gateway = new Gateway(registry, { maxPromptChars: 2000 });
-    local = { registry, gateway, agent: new Agent(gateway, defaultIndex()) };
+    local = { registry, gateway, agent: new Agent(gateway, defaultIndex()), assistant: new Agent(gateway, assistantIndex()) };
   }
   return local;
 }
@@ -82,9 +83,9 @@ export async function run(req: RunRequest): Promise<{ res: GatewayResult; via: '
     throw new Error('api unavailable');
   } catch (e) {
     if (e instanceof ApiError) throw e;
-    const { gateway, agent } = localEngine();
+    const { gateway, agent, assistant } = localEngine();
     try {
-      const res = req.mode === 'agent' ? await agent.run(req.prompt, req.policy, req.chaos) : await gateway.chat(req.prompt, req.policy, req.chaos);
+      const res = req.mode === 'assistant' ? await assistant.run(req.prompt, req.policy, null) : req.mode === 'agent' ? await agent.run(req.prompt, req.policy, req.chaos) : await gateway.chat(req.prompt, req.policy, req.chaos);
       return { res, via: 'browser' };
     } catch (err) {
       if (err instanceof InvalidRequest) throw new ApiError(422, err.message);

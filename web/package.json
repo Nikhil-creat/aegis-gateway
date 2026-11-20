@@ -11,8 +11,9 @@
     "preview": "node scripts/serve.mjs dist",
     "typecheck": "tsc --noEmit",
     "parity": "tsx scripts/parity.ts",
+    "assistant": "tsx scripts/assistant-check.ts",
     "check": "node scripts/check.mjs",
-    "test": "npm run typecheck && npm run parity && npm run build && npm run check"
+    "test": "npm run typecheck && npm run parity && npm run assistant && npm run build && npm run check"
   },
   "dependencies": {
     "react": "^19.2.0",

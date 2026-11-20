@@ -43,6 +43,30 @@ export default function About() {
         </div>
       </Section>
 
+      <Section id="credentials">
+        <Eyebrow>Credentials</Eyebrow>
+        <H2>Training and experience</H2>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          <article className="border border-gray-200 bg-white p-6">
+            <h3 className="font-serif text-xl tracking-tight">Internships and simulations</h3>
+            <ul className="mt-3 space-y-2 text-sm leading-relaxed text-ink/70">
+              <li>Data Analytics Intern, Thiranex (Jul to Aug 2026)</li>
+              <li>Machine Learning Engineer internship program, Yuva Intern (NSDC)</li>
+              <li>Forage job simulations: Latham &amp; Watkins (data and technology transactions), Datacom (software development), Clifford Chance (cyber security)</li>
+            </ul>
+          </article>
+          <article className="border border-gray-200 bg-white p-6">
+            <h3 className="font-serif text-xl tracking-tight">Certificate issuers</h3>
+            <p className="mt-3 text-sm leading-relaxed text-ink/70">Skill India and NASSCOM, IBM SkillsBuild (Artificial Intelligence Fundamentals), UiPath, Reliance Foundation, and Forage programs from Deloitte, TATA, BCG Platinion, Skyscanner, Vista, AIG, EAB, LifeArc, British Airways, Morrison Foerster and Ashurst.</p>
+          </article>
+          <article className="border border-gray-200 bg-white p-6">
+            <h3 className="font-serif text-xl tracking-tight">Focus areas</h3>
+            <p className="mt-3 text-sm leading-relaxed text-ink/70">Cloud and cybersecurity, data and AI, automation and robotics, software and systems engineering, and consulting simulations. Python with pandas, SQL, Power BI, Django and React underneath.</p>
+          </article>
+        </div>
+        <p className="mt-5 text-xs text-ink/50">100+ certificates in total; the list above names issuers rather than every certificate.</p>
+      </Section>
+
       <Section tone="mist">
         <Eyebrow>More work</Eyebrow>
         <H2>Other projects</H2>

@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { BudgetExceeded, CHAOS_MODES, InvalidRequest, POLICIES, rateLimit } from '../lib/engine.js';
 import { clientIp, getState } from './_state.js';
 
-/** POST /api/chat  { prompt, policy?, mode?: 'chat' | 'agent', chaos? } -> same shape as the Python /v1/chat and /v1/agent/run. */
+/** POST /api/chat  { prompt, policy?, mode?: 'chat' | 'agent' | 'assistant', chaos? } -> same shape as the Python /v1/chat and /v1/agent/run. */
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') {
@@ -25,8 +25,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const chaos = (CHAOS_MODES as readonly string[]).includes(String(b.chaos)) ? String(b.chaos) : null;
 
   try {
-    const { gateway, agent } = await getState();
-    const out = b.mode === 'agent' ? await agent.run(prompt, policy, chaos) : await gateway.chat(prompt, policy, chaos);
+    const { gateway, agent, assistant } = await getState();
+    const out = b.mode === 'assistant' ? await assistant.run(prompt, policy, null)
+      : b.mode === 'agent' ? await agent.run(prompt, policy, chaos)
+      : await gateway.chat(prompt, policy, chaos);
     res.setHeader('X-Request-ID', out.request_id);
     if (out.status === 'error') return res.status(502).json({ error: 'all_models_failed', detail: out.answer });
     return res.status(200).json(out);

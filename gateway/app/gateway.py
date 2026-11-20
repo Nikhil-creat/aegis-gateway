@@ -20,7 +20,7 @@ from app.providers import ProviderError, ProviderPool
 from app.router import plan_route
 from app.security import redact, scan_injection
 
-POLICIES = ("smart-router", "always-cheap", "always-strong", "latency-optimized", "privacy-strict")
+POLICIES = ("smart-router", "learned-router", "always-cheap", "always-strong", "latency-optimized", "privacy-strict")
 CHAOS_MODES = ("rate_limit", "timeout", "provider_500")
 BACKOFF_BASE_S = 0.25
 BACKOFF_CAP_S = 8.0

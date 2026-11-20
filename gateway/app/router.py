@@ -12,6 +12,7 @@ import re
 from collections.abc import Callable
 from dataclasses import dataclass
 
+from app.learned_router import get_model
 from app.models import LOCAL_MODEL, ModelInfo, Registry
 
 _CODE = re.compile(r"```|\b(?:def|class|function|import)\b")
@@ -97,6 +98,12 @@ def plan_route(text: str, policy: str, registry: Registry) -> Route:
         )
 
     tier = a.tier
+    cnn_p: float | None = None
+    if policy == "learned-router":
+        cnn = get_model()
+        if cnn is not None:
+            cnn_p = cnn.predict_proba(text)
+            tier = "reasoning" if cnn_p >= 0.5 else "fast"
     if policy in ("always-cheap", "latency-optimized"):
         tier = "fast"
     elif policy == "always-strong":
@@ -116,6 +123,13 @@ def plan_route(text: str, policy: str, registry: Registry) -> Route:
     if policy == "smart-router":
         reason = f"smart-router: difficulty {a.difficulty:.2f} ({why}) -> {tier} tier, cheapest healthy model first."
         confidence = round(0.5 + abs(a.difficulty - 0.5), 2)
+    elif policy == "learned-router":
+        if cnn_p is None:
+            reason = f"learned-router weights not found; fell back to the heuristic score ({a.difficulty:.2f}) -> {tier} tier."
+            confidence = round(0.5 + abs(a.difficulty - 0.5), 2)
+        else:
+            reason = f"learned-router: char-CNN p(strong)={cnn_p:.2f} -> {tier} tier, cheapest healthy model first (heuristic score was {a.difficulty:.2f})."
+            confidence = round(max(cnn_p, 1 - cnn_p), 2)
     elif policy == "always-cheap":
         reason = f"always-cheap pins the fast tier regardless of difficulty ({a.difficulty:.2f})."
         confidence = 1.0

@@ -23,6 +23,8 @@ client ──► Guard ──► Router ──► Cache ──► Provider (Groq
 | Security | Injection firewall, PII redaction before routing/cache/logging, sliding-window rate limit, optional API key (constant-time compare), AST-allow-listed calculator (no `eval`). |
 | Agent | Planner → security check → tools (calculator, hybrid RAG, telemetry) → verifier → synthesizer. Max 5 steps; refuses with "Insufficient grounded context" below the retrieval threshold. |
 | Retrieval | BM25 + hashed char-trigram vectors, fused with reciprocal rank fusion. |
+| Learned router | `learned-router` policy: a character-level 1-D CNN (about 4.2k parameters, NumPy, hand-written backprop) predicting whether a prompt needs the strong tier. Prototype trained on synthetic labelled prompts (`python -m evals.train_router`). |
+| Assistant | "Ask Aegis" chat on the website: a bounded retrieval agent over a small knowledge base about the author and the gateway. Cites sources, refuses out-of-scope questions, answers through the gateway (Groq/Gemini when keys are set). |
 | Evals | 30 tasks, three deterministic scorers (correctness, trajectory, compliance), CI gate on pass-rate drop and cost savings. |
 | Chaos | `X-Chaos-Simulate: rate_limit \| timeout \| provider_500` fails the first model on demand. |
 
@@ -44,7 +46,8 @@ Smart routing is 70.2% cheaper than always-strong and gives up 6.7 points of pas
 cd gateway
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
-pytest -q                                  # 76 tests
+pytest -q                                  # 82 tests
+python -m evals.train_router               # retrain the CNN router + held-out report
 python -m evals.benchmark                  # mock run + CI gate
 cp .env.example .env                       # add GROQ_API_KEY / GEMINI_API_KEY (never commit .env)
 python -m evals.benchmark --live           # real numbers for your resume
@@ -58,6 +61,15 @@ npm install
 npm run dev          # build + serve at http://localhost:4173
 npm test             # typecheck, Python/TS parity, build, SEO and bundle audit
 ```
+
+## Learned router (prototype)
+
+| Router | Held-out accuracy | Recall on strong-tier prompts |
+|---|---|---|
+| keyword heuristic | 61.4% | 22.8% |
+| character CNN | 91.5% | 96.6% |
+
+Held-out means 1,000 synthetic prompts built from phrase pools disjoint from training, with no benchmark prompt in either set. Labels follow a documented definition (needs several facts combined or multi-step reasoning), so this shows the CNN learned structure, not that it is better on production traffic. On the 30-task mock benchmark it passes 96.7% and fixes both hidden multi-hop tasks but misses `hop-02` (the heuristic catches that one through its "first/next" cues). The router was built after the benchmark exposed that weakness, so treat that run as optimistic. Next step: a hybrid of both routers trained on real request logs.
 
 ## Resume bullet (fill X and Y from your own `--live` run)
 
@@ -74,9 +86,9 @@ Never type X or Y from a guess. They are in `gateway/artifacts/benchmark_report.
 
 ## Honest scope
 
-Implemented and tested: everything above except the items below. `gateway/tests/test_api.py` covers the FastAPI layer and skips itself when `fastapi`/`httpx` are not installed, so run `pytest` in a full environment before relying on it.
+Implemented and tested: everything above except the items below. The CNN is a small prototype, not a production classifier. `gateway/tests/test_api.py` covers the FastAPI layer and skips itself when `fastapi`/`httpx` are not installed, so run `pytest` in a full environment before relying on it.
 
-Not implemented: learned (CNN) router, human-in-the-loop approval, SSE streaming, idempotency keys, LangGraph runtime, PostgreSQL (SQLite is the store), shared rate limiter across replicas. The website playground runs a TypeScript port of the engine, verified against Python for identical model, tier, tools and cost on 90 task runs (`npm run parity`).
+Not implemented: CNN router in the website's TypeScript playground (Python API only), a Python endpoint for the assistant (it lives in the web functions), chat memory in the assistant, human-in-the-loop approval, SSE streaming, idempotency keys, LangGraph runtime, PostgreSQL (SQLite is the store), shared rate limiter across replicas. The website playground runs a TypeScript port of the engine, verified against Python for identical model, tier, tools and cost on 90 task runs (`npm run parity`).
 
 ## Deploy
 

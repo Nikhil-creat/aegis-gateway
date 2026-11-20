@@ -1,0 +1,42 @@
+{
+ "generated": "2026-11-20 04:47 UTC",
+ "params": 4161,
+ "vocab": 96,
+ "filters": 32,
+ "width": 5,
+ "train_n": 3000,
+ "test_n": 1000,
+ "final_train_loss": 0.0001,
+ "heldout": {
+  "cnn": {
+   "accuracy": 0.919,
+   "precision_strong": 0.8747763864042933,
+   "recall_strong": 0.978,
+   "tp": 489,
+   "fp": 70,
+   "fn": 11,
+   "tn": 430
+  },
+  "heuristic": {
+   "accuracy": 0.614,
+   "precision_strong": 1.0,
+   "recall_strong": 0.228,
+   "tp": 114,
+   "fp": 0,
+   "fn": 386,
+   "tn": 500
+  }
+ },
+ "hidden_multihop_p_strong": {
+  "hop-06": 0.946,
+  "hop-07": 0.996
+ },
+ "benchmark_learned_router_mock": {
+  "pass_rate": 0.9666666666666667,
+  "cost_usd": 0.00079988,
+  "latency_p95_ms": 450,
+  "failed": [
+   "hop-02"
+  ]
+ }
+}

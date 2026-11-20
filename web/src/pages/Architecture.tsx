@@ -1,7 +1,9 @@
 import Breadcrumbs from '../components/Breadcrumbs';
 import NextCards from '../components/NextCards';
+import { pct } from '../data/bench';
 import { Code, Eyebrow, H2, PageHeader, Section, Table } from '../components/ui';
 import { Link } from '../router';
+import study from '../data/router_study.json';
 
 const BOXES: Array<[number, number, string, string]> = [
   [20, 60, 'Client', 'POST /v1/chat'],
@@ -101,6 +103,24 @@ export default function Architecture() {
       </Section>
 
       <Section>
+        <Eyebrow>Learned router</Eyebrow>
+        <H2 id="learned-router">A CNN that learned the blind spot</H2>
+        <div className="mt-8 grid gap-8 lg:grid-cols-2">
+          <div className="prose-aegis">
+            <p>The Python gateway also ships a <code className="inline">learned-router</code> policy: a character-level 1-D CNN ({study.params.toLocaleString('en-US')} parameters, written in NumPy with hand-coded backpropagation) that predicts whether a prompt needs the strong tier. It reads raw characters, so it can pick up structure such as several short questions in a row, which the keyword heuristic cannot see.</p>
+            <p>It is a prototype. Labels come from a documented definition over synthetic prompts, train and test use disjoint phrase pools, and no benchmark prompt appears in either set. It is available in the Python API only, not in this page&apos;s TypeScript playground.</p>
+          </div>
+          <div>
+            <Table caption="Held-out routing accuracy: heuristic router against the character CNN" head={['Router', 'Accuracy', 'Strong-tier recall']} rows={[
+              ['Heuristic', pct(study.heldout.heuristic.accuracy), pct(study.heldout.heuristic.recall_strong)],
+              ['Character CNN', pct(study.heldout.cnn.accuracy), pct(study.heldout.cnn.recall_strong)],
+            ]} />
+            <p className="mt-3 text-xs leading-relaxed text-ink/60">{study.test_n.toLocaleString('en-US')} held-out synthetic prompts. On the 30-task benchmark (mock provider) the CNN policy passes {pct(study.benchmark_learned_router_mock.pass_rate)}, fixing both hidden multi-hop tasks and failing {study.benchmark_learned_router_mock.failed.join(', ')} instead. That run is optimistic: the router was built after the benchmark exposed the weakness. A hybrid of both routers, trained on real traffic, is the next step.</p>
+          </div>
+        </div>
+      </Section>
+
+      <Section tone="mist">
         <Eyebrow>Reliability</Eyebrow>
         <H2>Failover rules</H2>
         <Code label="gateway.chat(): simplified">{`candidates = registry.candidates(tier, policy)   # healthy models only
@@ -115,20 +135,20 @@ raise AllProvidersFailed`}</Code>
         <p className="mt-4 text-sm text-ink/60 max-w-3xl">Use <code className="inline">X-Chaos-Simulate: rate_limit | timeout | provider_500</code> to fail the first model on purpose. The playground exposes the same control.</p>
       </Section>
 
-      <Section tone="mist">
+      <Section>
         <Eyebrow>Decisions</Eyebrow>
         <H2>Why it is built this way</H2>
         <div className="mt-8"><Table caption="Design decisions and their trade-offs" head={['Decision', 'Reasoning and trade-off']} rows={DECISIONS} /></div>
       </Section>
 
-      <Section>
+      <Section tone="mist">
         <Eyebrow>API</Eyebrow>
         <H2>Endpoints</H2>
         <div className="mt-8"><Table caption="FastAPI endpoints" head={['Endpoint', 'Purpose']} rows={ENDPOINTS.map(([a, b]) => [<code key={a} className="inline">{a}</code>, b])} /></div>
         <p className="mt-4 text-sm text-ink/60">Auth is an optional <code className="inline">X-API-Key</code> compared in constant time. Interactive docs are served at <code className="inline">/docs</code>.</p>
       </Section>
 
-      <Section tone="mist">
+      <Section>
         <Eyebrow>Interview prep</Eyebrow>
         <H2>Questions this project should answer</H2>
         <dl className="mt-8 grid gap-4 md:grid-cols-2">

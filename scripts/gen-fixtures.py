@@ -14,9 +14,11 @@ GATEWAY = ROOT / "gateway"
 WEB = ROOT / "web"
 sys.path.insert(0, str(GATEWAY))
 
+from app.kb import DEFAULT_CHUNKS  # noqa: E402
 from evals.dataset import TASKS  # noqa: E402
 
 subprocess.run([sys.executable, "-m", "evals.benchmark"], cwd=GATEWAY, check=True)
+subprocess.run([sys.executable, "-m", "evals.train_router"], cwd=GATEWAY, check=True)
 report = GATEWAY / "artifacts" / "benchmark_report.json"
 
 fixtures = WEB / "scripts" / "fixtures"
@@ -26,4 +28,11 @@ tasks = [{"id": t.id, "category": t.category, "mode": t.mode, "prompt": t.prompt
 shutil.copy(report, fixtures / "benchmark_report.json")
 shutil.copy(report, WEB / "src" / "data" / "benchmark.json")
 shutil.copy(GATEWAY / "artifacts" / "benchmark_report.png", WEB / "public" / "benchmark_report.png")
+shutil.copy(GATEWAY / "artifacts" / "router_study.json", WEB / "src" / "data" / "router_study.json")
+kb = [{"doc": c.doc, "id": c.id, "text": c.text} for c in DEFAULT_CHUNKS]
+(WEB / "lib" / "kb.ts").write_text(
+    "// GENERATED from gateway/app/kb.py by scripts/gen-fixtures.py. Do not edit by hand.\n"
+    "export interface KBChunk { doc: string; id: string; text: string }\n"
+    f"export const DEFAULT_CHUNKS: KBChunk[] = {json.dumps(kb, indent=2)};\n"
+)
 print(f"wrote {len(tasks)} tasks and copied the benchmark report into web/")

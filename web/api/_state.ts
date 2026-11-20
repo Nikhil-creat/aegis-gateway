@@ -1,10 +1,12 @@
 import type { VercelRequest } from '@vercel/node';
 import { Agent, Gateway, MOCK_MODELS, Registry, defaultIndex, discoverCached } from '../lib/engine.js';
+import { assistantIndex } from '../lib/assistant-kb.js';
 import { makeLiveCaller } from '../lib/live.js';
 
 const registry = new Registry([...MOCK_MODELS]);
 const gateway = new Gateway(registry);
 const agent = new Agent(gateway, defaultIndex());
+const assistant = new Agent(gateway, assistantIndex());
 
 /** Per-instance singletons. Warm Vercel instances reuse them; cold starts begin empty (documented limitation). */
 export async function getState(env: Record<string, string | undefined> = process.env) {
@@ -17,7 +19,7 @@ export async function getState(env: Record<string, string | undefined> = process
     allowChaos: env.ALLOW_CHAOS !== 'false',
     cooldownS: 30,
   };
-  return { registry, gateway, agent, discovery: d };
+  return { registry, gateway, agent, assistant, discovery: d };
 }
 
 export function clientIp(req: VercelRequest): string {

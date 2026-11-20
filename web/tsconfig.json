@@ -15,5 +15,5 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["src", "lib", "api", "scripts/parity.ts", "site.config.ts"]
+  "include": ["src", "lib", "api", "scripts/parity.ts", "scripts/assistant-check.ts", "site.config.ts"]
 }

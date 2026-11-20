@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ComponentType } from 'react';
 import { findRoute } from '../site.config';
+import AssistantLauncher from './components/AssistantLauncher';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import { RouterProvider, normalize, usePath } from './router';
@@ -55,6 +56,7 @@ function Shell({ initial }: { initial: Shown }) {
         <Page />
       </main>
       <Footer />
+      <AssistantLauncher />
     </>
   );
 }

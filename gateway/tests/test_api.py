@@ -69,7 +69,10 @@ def test_budget_breaker_returns_503():
 
 def test_rag_ingest_then_agent_cites_the_new_document():
     with client() as c:
-        c.post("/v1/rag/ingest", json={"doc_id": "handbook", "text": "The office wifi password rotates every Monday morning."})
+        c.post(
+            "/v1/rag/ingest",
+            json={"doc_id": "handbook", "text": "The office wifi password rotates every Monday morning."},
+        )
         r = c.post("/v1/agent/run", json={"question": "When does the office wifi password rotate?"}).json()
         assert "[handbook:c1]" in r["answer"]
 

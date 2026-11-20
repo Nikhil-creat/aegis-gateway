@@ -35,7 +35,7 @@ mkdirSync(tmp, { recursive: true });
 // 1. CSS ----------------------------------------------------------------------------------------------------------
 const sources = [...walk(join(root, 'src')).filter((f) => /\.(tsx?|css)$/.test(f)), join(root, 'index.html')];
 const candidates = new Set();
-for (const f of sources) for (const m of readFileSync(f, 'utf8').matchAll(/[^\s"'`<>=(){}\\,;]+/g)) candidates.add(m[0]);
+for (const f of sources) for (const m of readFileSync(f, 'utf8').matchAll(/[^\s"'`<>={}\\;]+/g)) candidates.add(m[0]);
 const twDir = dirname(require.resolve('tailwindcss/package.json'));
 const compiler = await compile(readFileSync(join(root, 'src/styles.css'), 'utf8'), {
   base: join(root, 'src'),

@@ -1,6 +1,6 @@
 # Benchmark report
 
-Generated 2026-11-20 04:29 UTC - 30 tasks - **MOCK provider (synthetic capability profile; not real model quality)**
+Generated 2026-11-20 04:47 UTC - 30 tasks - **MOCK provider (synthetic capability profile; not real model quality)**
 
 | Policy | Pass rate | Correctness | Trajectory | Compliance | Cost (USD) | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|
